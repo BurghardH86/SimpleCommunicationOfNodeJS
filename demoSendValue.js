@@ -1,8 +1,9 @@
-var http = require('http');
+var express = require('express');
+var app = express();
 var dt = require('./timeModule');
 var line = 0;
 
-var server = http.createServer().listen(8080, function(){
+var server = app.listen(8080, function(){
 	var host = server.address().address;
 	var port = server.address().port;
 	console.log('Server running at http://%s:%s/', host, port);
@@ -17,6 +18,6 @@ setInterval(function(){
 	publishLine();
 }, 1000);
 
-http.get('/time', function(req, res){
+app.get('/time', function(req, res){
 	res.end(String(line));
 });
